@@ -3,7 +3,21 @@
     <style name="Base.Theme.TapTapGame" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
     </style>
 
     <style name="Theme.TapTapGame" parent="Base.Theme.TapTapGame" />
+
+    <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="colorPrimary">@android:color/holo_purple</item>
+        <item name="colorSecondary">@android:color/holo_purple</item>
+        <item name="colorSurface">@android:color/holo_purple</item>
+        <item name="colorOnSurface">@android:color/holo_purple</item>
+        <item name="alertDialogStyle">@style/MaterialAlertDialog.App</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.App.Button</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.App.Button</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>

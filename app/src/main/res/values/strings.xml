@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">TapTapGame</string>
     <string name="score">Score: 0</string>
+    <string name="game_over">Game Over</string>
 </resources>
