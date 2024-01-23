@@ -1,5 +1,6 @@
 package com.blacklight.taptapgame.activities;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -26,6 +27,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private int clicked = -1, actual = -1;
     private int scoreCount = 0;
     private int countDown = 3;
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +57,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         blue.setOnClickListener(this);
         yellow.setOnClickListener(this);
 
-//        handler = new Handler(Looper.getMainLooper());
         MaterialCardView[] cards = {red, green, blue, yellow};
 
         // game countdown
@@ -81,6 +82,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     score.setText(scoreText);
                 }
                 else {
+                    stopSound();
+                    playSound(6);
                     String countDownText = "" + countDown;
                     score.setText(countDownText);
                     countDown--;
@@ -95,15 +98,23 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         actual = (int) (Math.random() * 4);
         switch (actual) {
             case 0:
+                stopSound();
+                playSound(1);
                 redImage.setImageResource(R.drawable.gray_box);
                 break;
             case 1:
+                stopSound();
+                playSound(2);
                 greenImage.setImageResource(R.drawable.gray_box);
                 break;
             case 2:
+                stopSound();
+                playSound(3);
                 blueImage.setImageResource(R.drawable.gray_box);
                 break;
             case 3:
+                stopSound();
+                playSound(4);
                 yellowImage.setImageResource(R.drawable.gray_box);
                 break;
         }
@@ -112,10 +123,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             public void run() {
                 if (clicked == -1 || clicked != actual) {
                     // stop the game
+                    stopSound();
+                    playSound(5);
                     removeHandler(handler);
                     createDialog();
                 }
                 else {
+                    stopSound();
                     switch (actual) {
                         case 0:
                             redImage.setImageResource(R.drawable.red_box);
@@ -133,7 +147,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     startGame(cards);
                 }
             }
-        }, 1500);
+        }, 1000);
     }
 
     private void removeHandler(Handler handler) {
@@ -208,5 +222,46 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             finishAffinity();
         });
         builder.show();
+    }
+
+    private void playSound(int sound) {
+        int id = -1;
+        switch (sound) {
+            case 1:
+                id = R.raw.red;
+                break;
+            case 2:
+                id = R.raw.green;
+                break;
+            case 3:
+                id = R.raw.blue;
+                break;
+            case 4:
+                id = R.raw.yellow;
+                break;
+            case 5:
+                id = R.raw.wrong;
+                break;
+            case 6:
+                id = R.raw.countdown;
+                break;
+            default:
+                break;
+        }
+        if (id == -1) {
+            return;
+        }
+        if (mediaPlayer == null) {
+            mediaPlayer = MediaPlayer.create(this, id);
+        }
+        mediaPlayer.start();
+    }
+
+    private void stopSound() {
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 }
