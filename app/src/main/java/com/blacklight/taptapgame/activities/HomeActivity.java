@@ -160,19 +160,27 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.green_card_view) {
-            increaseScore();
+            if (actual == 1) {
+                increaseScore();
+            }
             clicked = 1;
         }
         else if (v.getId() == R.id.red_card_view) {
-            increaseScore();
+            if (actual == 0) {
+                increaseScore();
+            }
             clicked = 0;
         }
         else if (v.getId() == R.id.blue_card_view) {
-            increaseScore();
+            if (actual == 2) {
+                increaseScore();
+            }
             clicked = 2;
         }
         else if (v.getId() == R.id.yellow_card_view) {
-            increaseScore();
+            if (actual == 3) {
+                increaseScore();
+            }
             clicked = 3;
         }
         String scoreText = "Score: " + getScore();
