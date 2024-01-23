@@ -16,6 +16,8 @@ import com.blacklight.taptapgame.R;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import org.w3c.dom.Text;
+
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TextView score;
@@ -191,7 +193,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
         builder.setCustomTitle(getLayoutInflater().inflate(R.layout.dialog_title, null));
         builder.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.dialog_background, null));
-        builder.setMessage("Your score is " + getScore());
+        View view = getLayoutInflater().inflate(R.layout.dialog_message, null);
+        TextView tempTextView = view.findViewById(R.id.dialog_msg);
+        String message = "Your score is " + getScore();
+        tempTextView.setText(message);
+        builder.setView(view);
         builder.setCancelable(false);
         builder.setPositiveButton("Play Again", (dialog, which) -> {
             dialog.dismiss();

@@ -5,19 +5,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
+
+        android:id="@+id/dialog_msg"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="@string/score"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/rubik_burned"
         android:layout_margin="5dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/game_over"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:fontFamily="@font/rubik_burned" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
