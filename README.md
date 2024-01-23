@@ -1,6 +1,7 @@
 <h1 align="center" id="title">Tap Tap</h1>
 
-<p align="center"><img src="https://drive.google.com/file/d/1PkLtiK3MGtPqhTsfyHg0PmgdorLhc_Mo/view?usp=drive_link" alt="project-image"></p>
+![splash_image](https://github.com/HarshAggarwal1/TapTapGame/assets/88721766/47a34d35-8c83-4d60-9c9f-e7cf077e881f)
+
 
 <p id="description">A fun game in which you have to click on boxes every second whenever the box turns gray if you click a coloured box or do not click any box then GAME OVER!</p>
 
