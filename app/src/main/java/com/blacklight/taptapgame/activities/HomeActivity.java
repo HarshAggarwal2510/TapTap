@@ -117,6 +117,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 createDialog();
             }
             else {
+                clicked = -1;
                 stopSound();
                 switch (actual) {
                     case 0:
