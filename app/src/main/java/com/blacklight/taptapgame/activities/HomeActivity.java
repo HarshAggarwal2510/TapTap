@@ -24,6 +24,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private int scoreCount = 0;
     private int countDown = 3;
     private MediaPlayer mediaPlayer;
+    private boolean gameEnded;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +109,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             if (clicked == -1 || clicked != actual) {
                 // stop the game
                 stopSound();
-                playSound(5);
+                if (!gameEnded) {
+                    playSound(5);
+                    gameEnded = true;
+                }
                 removeHandler(handler);
                 createDialog();
             }
@@ -145,6 +149,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         };
         getOnBackPressedDispatcher().addCallback(this,onBackPressedCallback);
+
+        gameEnded = false;
     }
 
     //  Methods for scoreCount
@@ -162,11 +168,21 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             if (actual == 1) {
                 increaseScore();
             }
+            else {
+                stopSound();
+                playSound(5);
+                gameEnded = true;
+            }
             clicked = 1;
         }
         else if (v.getId() == R.id.red_card_view) {
             if (actual == 0) {
                 increaseScore();
+            }
+            else {
+                stopSound();
+                playSound(5);
+                gameEnded = true;
             }
             clicked = 0;
         }
@@ -174,11 +190,21 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             if (actual == 2) {
                 increaseScore();
             }
+            else {
+                stopSound();
+                playSound(5);
+                gameEnded = true;
+            }
             clicked = 2;
         }
         else if (v.getId() == R.id.yellow_card_view) {
             if (actual == 3) {
                 increaseScore();
+            }
+            else {
+                stopSound();
+                playSound(5);
+                gameEnded = true;
             }
             clicked = 3;
         }
