@@ -7,7 +7,6 @@ import android.os.Looper;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,12 +16,9 @@ import com.blacklight.taptapgame.R;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import org.w3c.dom.Text;
-
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TextView score;
-    private MaterialCardView red, green, blue, yellow;
     private ImageView redImage, greenImage, blueImage, yellowImage;
     private int clicked = -1, actual = -1;
     private int scoreCount = 0;
@@ -40,16 +36,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         String initMessage = "Be Ready!";
         score.setText(initMessage);
 
-        red = findViewById(R.id.red_card_view);
+        MaterialCardView red = findViewById(R.id.red_card_view);
         redImage = findViewById(R.id.red_image_view);
 
-        green = findViewById(R.id.green_card_view);
+        MaterialCardView green = findViewById(R.id.green_card_view);
         greenImage = findViewById(R.id.green_image_view);
 
-        blue = findViewById(R.id.blue_card_view);
+        MaterialCardView blue = findViewById(R.id.blue_card_view);
         blueImage = findViewById(R.id.blue_image_view);
 
-        yellow = findViewById(R.id.yellow_card_view);
+        MaterialCardView yellow = findViewById(R.id.yellow_card_view);
         yellowImage = findViewById(R.id.yellow_image_view);
 
         red.setOnClickListener(this);
@@ -57,43 +53,33 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         blue.setOnClickListener(this);
         yellow.setOnClickListener(this);
 
-        MaterialCardView[] cards = {red, green, blue, yellow};
-
         // game countdown
         countDown();
 
         // game started
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startGame(cards);
-            }
-        }, 4500);
+        new Handler(Looper.getMainLooper()).postDelayed(this::startGame, 4500);
     }
 
     private void countDown() {
         Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (countDown == 0) {
-                    removeHandler(handler);
-                    String scoreText = "Score: " + getScore();
-                    score.setText(scoreText);
-                }
-                else {
-                    stopSound();
-                    playSound(6);
-                    String countDownText = "" + countDown;
-                    score.setText(countDownText);
-                    countDown--;
-                    countDown();
-                }
+        handler.postDelayed(() -> {
+            if (countDown == 0) {
+                removeHandler(handler);
+                String scoreText = "Score: " + getScore();
+                score.setText(scoreText);
+            }
+            else {
+                stopSound();
+                playSound(6);
+                String countDownText = "" + countDown;
+                score.setText(countDownText);
+                countDown--;
+                countDown();
             }
         }, 1000);
     }
 
-    private void startGame(MaterialCardView[] cards) {
+    private void startGame() {
         Handler handler = new Handler(Looper.getMainLooper());
         actual = (int) (Math.random() * 4);
         switch (actual) {
@@ -118,34 +104,31 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 yellowImage.setImageResource(R.drawable.gray_box);
                 break;
         }
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (clicked == -1 || clicked != actual) {
-                    // stop the game
-                    stopSound();
-                    playSound(5);
-                    removeHandler(handler);
-                    createDialog();
+        handler.postDelayed(() -> {
+            if (clicked == -1 || clicked != actual) {
+                // stop the game
+                stopSound();
+                playSound(5);
+                removeHandler(handler);
+                createDialog();
+            }
+            else {
+                stopSound();
+                switch (actual) {
+                    case 0:
+                        redImage.setImageResource(R.drawable.red_box);
+                        break;
+                    case 1:
+                        greenImage.setImageResource(R.drawable.green_box);
+                        break;
+                    case 2:
+                        blueImage.setImageResource(R.drawable.blue_box);
+                        break;
+                    case 3:
+                        yellowImage.setImageResource(R.drawable.yellow_box);
+                        break;
                 }
-                else {
-                    stopSound();
-                    switch (actual) {
-                        case 0:
-                            redImage.setImageResource(R.drawable.red_box);
-                            break;
-                        case 1:
-                            greenImage.setImageResource(R.drawable.green_box);
-                            break;
-                        case 2:
-                            blueImage.setImageResource(R.drawable.blue_box);
-                            break;
-                        case 3:
-                            yellowImage.setImageResource(R.drawable.yellow_box);
-                            break;
-                    }
-                    startGame(cards);
-                }
+                startGame();
             }
         }, 1200);
     }

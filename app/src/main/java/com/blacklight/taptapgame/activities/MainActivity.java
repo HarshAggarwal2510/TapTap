@@ -2,17 +2,11 @@ package com.blacklight.taptapgame.activities;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.core.view.WindowInsetsControllerCompat;
 
 import android.content.Intent;
-import androidx.core.graphics.Insets;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -41,14 +35,11 @@ public class MainActivity extends AppCompatActivity {
         imageLogo.setAnimation(topAnim);
         textLogo.setAnimation(bottomAnim);
 
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // Call next activity
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            // Call next activity
 
-                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                startActivity(intent);
-            }
+            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+            startActivity(intent);
         }, SPLASH_SCREEN);
     }
 
