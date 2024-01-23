@@ -285,4 +285,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onPause();
         stopSound();
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        stopSound();
+    }
 }
