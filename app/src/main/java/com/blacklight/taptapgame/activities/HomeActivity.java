@@ -147,7 +147,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     startGame(cards);
                 }
             }
-        }, 1000);
+        }, 1200);
     }
 
     private void removeHandler(Handler handler) {
@@ -263,5 +263,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             mediaPlayer.release();
             mediaPlayer = null;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopSound();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopSound();
     }
 }
