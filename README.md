@@ -1,14 +1,9 @@
 <h1 align="center" id="title">Tap Tap</h1>
 
-![splash_image](https://github.com/HarshAggarwal1/TapTapGame/assets/88721766/47a34d35-8c83-4d60-9c9f-e7cf077e881f)
-
-
 <p id="description">A fun game in which you have to click on boxes every second whenever the box turns gray if you click a coloured box or do not click any box then GAME OVER!</p>
 
 
-
-https://github.com/HarshAggarwal1/TapTapGame/assets/88721766/1e80b6d8-1fe7-47b5-ae3d-590fbb44d7ca
-
+https://github.com/HarshAggarwal2510/TapTap/assets/157530984/e09a4eb2-55da-40c0-ab20-490fbe8a92d7
 
 
 <h2>🛠️ Installation Steps:</h2>
